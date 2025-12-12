@@ -1,0 +1,170 @@
+:root {
+    /* Paleta */
+    --bg: #f7f7f9;
+    --card: #ffffff;
+    --border: #e5e7eb;
+    --text: #111827;
+    --muted: #6b7280;
+    --primary: #0a66c2;
+    --primary-ink: #ffffff;
+
+    /* Tamaños táctiles */
+    --touch: 44px;
+    /* mínimo recomendado para mobile */
+    --radius: 12px;
+    --spacing: 16px;
+}
+
+/* Reset básico */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: var(--spacing);
+}
+
+/* Layout */
+.header {
+    margin-bottom: 12px;
+}
+
+h1 {
+    margin: 0 0 4px;
+    font-size: 1.25rem;
+}
+
+.subtitle {
+    color: var(--muted);
+    margin: 0;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--spacing);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Grid mobile-first */
+.grid {
+    display: grid;
+    gap: 12px;
+}
+
+.grid-compact {
+    grid-template-columns: 1fr;
+}
+
+/* 1 columna en mobile */
+
+/* En pantallas medianas/grandes, 4 columnas */
+@media (min-width: 900px) {
+    .grid-compact {
+        grid-template-columns: repeat(4, minmax(220px, 1fr));
+    }
+}
+
+.field label {
+    font-size: 13px;
+    color: var(--text);
+    display: block;
+    margin-bottom: 6px;
+}
+
+.field input,
+.field select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 16px;
+    background: #fff;
+    min-height: var(--touch);
+}
+
+/* Botones: tamaño táctil y contraste */
+.actions,
+.toolbar {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 10px 14px;
+    border: 1px solid var(--primary);
+    background: var(--primary);
+    color: var(--primary-ink);
+    border-radius: 10px;
+    cursor: pointer;
+    min-height: var(--touch);
+}
+
+.btn.secondary {
+    background: #fff;
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* Tabla scrollable en mobile */
+.table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    /* scroll horizontal si no entra en pantallas chicas */
+}
+
+.table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.table th {
+    background: #f2f4f7;
+    text-align: left;
+}
+
+.delete {
+    color: #b00020;
+    cursor: pointer;
+}
+
+/* Footer */
+.footer {
+    margin-top: 12px;
+    color: var(--muted);
+}
+
+/* Modo impresión */
+@media print {
+
+    .header,
+    .toolbar,
+    form {
+        display: none;
+    }
+
+    .table {
+        border: none;
+        box-shadow: none;
+    }
+}
