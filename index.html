@@ -11,7 +11,7 @@
 <body>
     <header class="header">
         <h1>Frescura – Control de Stock</h1>
-        <p class="subtitle">Campos: CÓDIGO, Bultos, Unidades, Fecha + Pasillo</p>
+        <p class="subtitle">Campos: CÓDIGO, Bultos, Unidades, Fecha, Pasillo</p>
     </header>
 
     <!-- Form: 4 campos del Form Frescura + Pasillo -->
@@ -48,7 +48,7 @@
     </form>
 
     <section class="toolbar">
-        <button id="exportCsv" class="btn">Exportar a CSV (Excel)</button>
+        <button id="exportExcel" class="btn">Exportar a Excel (.xlsx)</button>
         <button id="printPdf" class="btn secondary">Imprimir / Guardar PDF</button>
         <button id="clearAll" class="btn secondary">Borrar todo</button>
     </section>
@@ -76,5 +76,6 @@
         <p>Desarrollado por <a href="">Amarilla Facundo</a></p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script src="./script.js"></script>
 </body>

@@ -2,7 +2,7 @@
 // Referencias
 const form = document.getElementById('formRegistro');
 const tbody = document.querySelector('#tablaDatos tbody');
-const exportCsvBtn = document.getElementById('exportCsv');
+const exportExcelBtn = document.getElementById('exportExcel'); // Nuevo botón
 const printBtn = document.getElementById('printPdf');
 const clearAllBtn = document.getElementById('clearAll');
 
@@ -11,21 +11,31 @@ const fields = ['codigo', 'bultos', 'unidades', 'fecha', 'pasillo'];
 
 // --- Utilidades ---
 function pad(n) { return String(n).padStart(2, '0'); }
+
+// Timestamp en formato dd/mm/yyyy HH:mm
 function formatoTimestamp(d = new Date()) {
-    const y = d.getFullYear();
-    const m = pad(d.getMonth() + 1);
     const day = pad(d.getDate());
+    const m = pad(d.getMonth() + 1);
+    const y = d.getFullYear();
     const hh = pad(d.getHours());
     const mm = pad(d.getMinutes());
-    return `${y}-${m}-${day} ${hh}:${mm}`;
+    return `${day}/${m}/${y} ${hh}:${mm}`;
 }
+
+// Convertir fecha ISO (yyyy-mm-dd) a dd/mm/yyyy
+function formatearFechaISOaDDMMYYYY(fechaISO) {
+    if (!fechaISO) return '';
+    const [yyyy, mm, dd] = fechaISO.split('-');
+    return `${dd}/${mm}/${yyyy}`;
+}
+
 function val(id) {
     const el = document.getElementById(id);
     return (el && el.value) ? el.value.trim() : '';
 }
 
 // Persistencia local
-const STORAGE_KEY = 'frescura_rows_v3';
+const STORAGE_KEY = 'frescura_rows_v6';
 function cargarLocal() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return [];
@@ -100,11 +110,17 @@ reconstruirTabla();
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const values = fields.map(val);
+
+    // Convertir la fecha del producto a dd/mm/yyyy
+    values[3] = formatearFechaISOaDDMMYYYY(values[3]);
+
     if (!validarObligatorios(values)) {
         alert('CÓDIGO, Bultos, Fecha y Pasillo son obligatorios.');
         return;
     }
+
     agregarFila(values, true);
+
     // Limpiar campos (fecha y pasillo se mantienen)
     ['codigo', 'bultos', 'unidades'].forEach(id => {
         const el = document.getElementById(id);
@@ -112,37 +128,28 @@ form.addEventListener('submit', (e) => {
     });
 });
 
-// Exportar CSV
-function tablaComoArray() {
+// Exportar a Excel (.xlsx) usando SheetJS
+exportExcelBtn.addEventListener('click', () => {
     const rows = [];
     for (const tr of tbody.querySelectorAll('tr')) {
         const cells = [...tr.querySelectorAll('td')].slice(0, 6).map(td => td.textContent);
         rows.push(cells);
     }
-    return rows;
-}
-function aCSV(data) {
+    if (!rows.length) {
+        alert('No hay filas para exportar.');
+        return;
+    }
+
     const header = ['Timestamp', 'CÓDIGO', 'Bultos', 'Unidades', 'Fecha', 'Pasillo'];
-    const all = [header, ...data];
-    return all.map(row =>
-        row.map(val => {
-            const v = (val ?? '').toString().replace(/\"/g, '\"\"');
-            return /[\",\n]/.test(v) ? `"${v}"` : v;
-        }).join(',')
-    ).join('\n');
-}
-function descargar(nombre, contenido, mime) {
-    const blob = new Blob([contenido], { type: mime });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = nombre; a.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-exportCsvBtn.addEventListener('click', () => {
-    const data = tablaComoArray();
-    if (!data.length) { alert('No hay filas para exportar.'); return; }
-    const csv = aCSV(data);
-    descargar('frescura_stock.csv', csv, 'text/csv');
+    const data = [header, ...rows];
+
+    // Crear libro Excel
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.aoa_to_sheet(data);
+    XLSX.utils.book_append_sheet(wb, ws, 'Stock');
+
+    // Descargar archivo
+    XLSX.writeFile(wb, 'frescura_stock.xlsx');
 });
 
 // Imprimir / Guardar PDF
