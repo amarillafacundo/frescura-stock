@@ -2,16 +2,23 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <title>Frescura – Control de Vencimientos</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./styles.css" />
+    <meta charset="UTF-8">
+    <title>Frescura – Control de Vencimientos - Hormina Negra S.A</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="images/favicon.ico">
 </head>
 
 <body>
     <header class="header">
-        <h1>Frescura – Control de Stock</h1>
-        <p class="subtitle">Campos: CÓDIGO, Bultos, Unidades, Fecha, Pasillo</p>
+        <div class="header-brand">
+            <img src="images/hormiga_negra_distribuidora_logo.webp" alt="Hormiga Negra Distribuidora" class="logo">
+            <div class="header-text">
+                <h1>Frescura – Control de Stock - Hormiga Negra S.A</h1>
+                <p class="subtitle">Campos: CÓDIGO, Bultos, Unidades, Fecha, Pasillo</p>
+            </div>
+        </div>
     </header>
 
     <!-- Form: 4 campos del Form Frescura + Pasillo -->
@@ -20,23 +27,23 @@
             <div class="field">
                 <label for="codigo">CÓDIGO <span class="req">*</span></label>
                 <input type="number" id="codigo" inputmode="numeric" autocapitalize="off" autocomplete="off"
-                    placeholder="Ingresa el código" required />
+                    placeholder="Ingresa el código" required>
             </div>
             <div class="field">
                 <label for="bultos">Bultos <span class="req">*</span></label>
-                <input type="number" id="bultos" inputmode="numeric" min="0" step="1" placeholder="0" required />
+                <input type="number" id="bultos" inputmode="numeric" min="0" step="1" placeholder="0" required>
             </div>
             <div class="field">
                 <label for="unidades">Unidades</label>
-                <input type="number" id="unidades" inputmode="numeric" min="0" step="1" placeholder="0" />
+                <input type="number" id="unidades" inputmode="numeric" min="0" step="1" placeholder="0">
             </div>
             <div class="field">
                 <label for="fecha">Fecha <span class="req">*</span></label>
-                <input type="date" id="fecha" required />
+                <input type="date" id="fecha" required>
             </div>
             <div class="field">
                 <label for="pasillo">Pasillo <span class="req">*</span></label>
-                <input type="number" id="pasillo" inputmode="numeric" step="1" placeholder="Ej.: 12" required />
+                <input type="number" id="pasillo" inputmode="numeric" step="1" placeholder="Ej.: 12" required>
             </div>
 
         </div>
@@ -73,8 +80,29 @@
     </section>
 
     <footer class="footer">
-        <p>Desarrollado por <a href="">Amarilla Facundo</a></p>
+        <div class="footer-content">
+    
+            <div class="footer-social">
+                <a href="https://github.com/amarillafacundo" target="_blank" aria-label="GitHub">
+                    <img src="images/github_logo.svg" alt="GitHub" class="social-icon">
+                </a>
+    
+                <a href="https://www.linkedin.com/in/facundo-emanuel-amarilla/" target="_blank" aria-label="LinkedIn">
+                    <img src="images/linkedin_logo.svg" alt="LinkedIn" class="social-icon linkedin">
+                </a>
+            </div>
+    
+            <p class="footer-text">
+                © 2025 Facundo Amarilla | Argentina
+            </p>
+    
+            <p class="footer-modified">
+                Last modified: <span id="lastModified"></span>
+            </p>
+    
+        </div>
     </footer>
+
 
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script src="./script.js"></script>

@@ -1,4 +1,5 @@
 
+
 // Referencias
 const form = document.getElementById('formRegistro');
 const tbody = document.querySelector('#tablaDatos tbody');
@@ -128,6 +129,7 @@ form.addEventListener('submit', (e) => {
     });
 });
 
+
 // Exportar a Excel (.xlsx) usando SheetJS
 exportExcelBtn.addEventListener('click', () => {
     const rows = [];
@@ -162,3 +164,7 @@ clearAllBtn.addEventListener('click', () => {
         guardarLocal([]); // vaciar storage
     }
 });
+
+// Actualizar año en el footer
+document.getElementById("lastModified").textContent =
+    document.lastModified;

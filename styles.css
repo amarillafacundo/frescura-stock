@@ -38,6 +38,22 @@ body {
     margin-bottom: 12px;
 }
 
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 48px;
+    height: auto;
+    object-fit: contain;
+}
+
+.header-text h1 {
+    margin: 0 0 4px;
+}
+
 h1 {
     margin: 0 0 4px;
     font-size: 1.25rem;
@@ -66,6 +82,49 @@ h1 {
     grid-template-columns: 1fr;
 }
 
+.footer {
+    margin-top: 24px;
+    padding: 20px 12px;
+    background: #000;
+    color: #fff;
+    border-radius: 12px;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.footer-social {
+    display: flex;
+    gap: 16px;
+}
+
+.social-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.social-icon.linkedin {
+    filter: none;
+}
+
+.social-icon:hover {
+    transform: scale(1.1);
+    opacity: 0.85;
+}
+
+.footer-text,
+.footer-modified {
+    font-size: 14px;
+    color: #ddd;
+}
 /* 1 columna en mobile */
 
 /* En pantallas medianas/grandes, 4 columnas */
@@ -166,5 +225,15 @@ h1 {
     .table {
         border: none;
         box-shadow: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        width: 40px;
+    }
+
+    h1 {
+        font-size: 1.1rem;
     }
 }
