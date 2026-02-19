@@ -251,3 +251,153 @@ h1 {
     text-align: center;
     white-space: normal;
 }
+
+/* ===== MOBILE: convertir tabla en tarjetas ===== */
+@media (max-width: 600px) {
+
+    .tabla-fallas thead {
+        display: none;
+        /* ocultamos encabezado */
+    }
+
+    .tabla-fallas,
+    .tabla-fallas tbody,
+    .tabla-fallas tr,
+    .tabla-fallas td {
+        display: block;
+        width: 100%;
+    }
+
+    .tabla-fallas tr {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 12px;
+    }
+
+    .tabla-fallas td {
+        text-align: left;
+        padding: 6px 0;
+    }
+
+    .tabla-fallas td:nth-child(4),
+    .tabla-fallas td:nth-child(6),
+    .tabla-fallas td:nth-child(8) {
+        display: inline-block;
+        width: auto;
+        margin-right: 8px;
+    }
+
+    .tabla-fallas td:nth-child(5) {
+        font-weight: bold;
+        font-size: 18px;
+        margin: 6px 0;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .tabla-fallas tr {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        padding: 14px;
+        margin-bottom: 16px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .tabla-fallas td {
+        padding: 4px 0;
+        font-size: 14px;
+    }
+
+    /* Código */
+    .tabla-fallas td:nth-child(1) {
+        font-size: 13px;
+        color: #6b7280;
+    }
+
+    /* Nombre producto */
+    .tabla-fallas td:nth-child(2) {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+
+    /* Peso */
+    .tabla-fallas td:nth-child(3) {
+        font-size: 13px;
+        color: #6b7280;
+        margin-bottom: 10px;
+    }
+
+    /* Controles */
+    .tabla-fallas td:nth-child(4),
+    .tabla-fallas td:nth-child(5),
+    .tabla-fallas td:nth-child(6) {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .tabla-fallas td:nth-child(5) {
+        font-size: 20px;
+        font-weight: bold;
+        margin: 0 10px;
+        min-width: 30px;
+        text-align: center;
+    }
+
+    /* Botones más modernos */
+    .btn-touch {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+        border-radius: 12px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-touch:active {
+        transform: scale(0.95);
+    }
+
+    /* Input manual */
+    .input-touch {
+        width: 70px;
+        height: 44px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 16px;
+        margin-top: 8px;
+    }
+
+    .btn-add {
+        height: 44px;
+        border-radius: 10px;
+        padding: 0 16px;
+        font-weight: bold;
+        margin-left: 6px;
+    }
+}
+
+.con-fallas {
+    border: 2px solid #22c55e !important;
+    background: #f0fdf4 !important;
+}
+
+.con-fallas td:nth-child(5) {
+    color: #16a34a;
+}
+
+.tabla-fallas tr {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tabla-fallas tr.animar {
+    transform: scale(1.02);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}

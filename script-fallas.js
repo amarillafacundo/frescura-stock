@@ -61,9 +61,14 @@ tabla.innerHTML = `
 
     const tbody = tabla.querySelector("tbody");
 
+    
     productosFiltrados.forEach((producto, index) => {
 
         const row = document.createElement("tr");
+        if (producto.fallas > 0) {
+            row.classList.add("con-fallas");
+}
+
 
         row.innerHTML = `
     <td>${producto.codigo}</td>
@@ -117,6 +122,7 @@ function sumar(index) {
     productos[index].fallas++;
     guardarDatos();
     renderProductos();
+    animarFila(index);
 }
 
 // =============================
@@ -153,8 +159,23 @@ function restar(index) {
         productos[index].fallas--;
         guardarDatos();
         renderProductos();
+        animarFila(index);
     }
 }
+
+function animarFila(index) {
+    setTimeout(() => {
+        const filas = document.querySelectorAll(".tabla-fallas tr");
+        if (filas[index]) {
+            filas[index].classList.add("animar");
+            setTimeout(() => {
+                filas[index].classList.remove("animar");
+            }, 200);
+        }
+    }, 50);
+}
+
+
 
 // =============================
 // 🆕 AGREGAR PRODUCTO
@@ -233,6 +254,8 @@ document.getElementById("exportFallas").addEventListener("click", () => {
 
     XLSX.writeFile(wb, "Fallas_PEPSICO.xlsx");
 });
+
+
 
 // =============================
 // 🚀 INICIALIZAR
