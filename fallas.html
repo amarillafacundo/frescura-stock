@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fallas de Producto – Hormiga Negra S.A</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="images/favicon.ico">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-brand">
+            <img src="images/hormiga_negra_distribuidora_logo.webp" alt="Hormiga Negra Distribuidora" class="logo">
+            <div class="header-text">
+                <h1>Frescura – Fallas de Producto – Hormiga Negra S.A</h1>
+                <p class="subtitle">Campos: CÓDIGO, Bultos, Unidades, Fecha, Pasillo</p>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- 🔝 Barra navegación -->
+    <nav class="top-nav">
+        <a href="index.html" class="nav-btn">Frescura</a>
+        <a href="fallas.html" class="nav-btn active">Fallas</a>
+    </nav>
+
+    <!-- 🆕 Sección Fallas -->
+    <section class="card">
+
+        <h1>Fallas de Producto – Hormiga Negra S.A</h1>
+
+        <!-- 🔍 Buscador -->
+        <div class="field">
+            <input type="text" id="buscarProducto" placeholder="Buscar por código o nombre...">
+        </div>
+
+        <!-- ➕ Agregar nuevo producto -->
+        <div class="grid grid-compact">
+            <div class="field">
+                <label>Código</label>
+                <input type="text" id="nuevoCodigo" placeholder="Ej: 1234">
+            </div>
+            <div class="field">
+                <label>Nombre</label>
+                <input type="text" id="nuevoNombre" placeholder="Ej: Doritos 150g">
+            </div>
+            <div class="field">
+                <label>Peso (g)</label>
+                <input type="number" id="nuevoPeso" placeholder="Ej: 150">
+            </div>
+        </div>
+
+        <div class="actions">
+            <button id="agregarProducto" class="btn">
+                Agregar Producto
+            </button>
+            <button id="resetFallas" class="btn secondary">
+                Resetear Fallas
+            </button>
+            <button id="exportFallas" class="btn">
+                Exportar Fallas
+            </button>
+        </div>
+
+        <!-- 📋 Lista dinámica -->
+        <div id="listaProductos" style="margin-top:20px;">
+            <!-- Aquí se renderizan las tarjetas -->
+        </div>
+
+    </section>
+
+    <!-- 📜 Script -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="./productos-base.js"></script>
+    <script src="./script-fallas.js"></script>
+
+</body>
+
+</html>
+
