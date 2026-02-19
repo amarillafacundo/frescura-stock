@@ -10,6 +10,11 @@
     <link rel="shortcut icon" href="images/favicon.ico">
 </head>
 
+<script>
+    document.getElementById("btnFallas")?.classList.add("active");
+</script>
+
+
 <body>
 
     <header class="header">
@@ -24,10 +29,11 @@
 
 
     <!-- 🔝 Barra navegación -->
-    <nav class="top-nav">
-        <a href="index.html" class="nav-btn">Frescura</a>
-        <a href="fallas.html" class="nav-btn active">Fallas</a>
-    </nav>
+    <div class="menu-bar">
+        <a href="index.html" class="menu-btn" id="btnFrescura">Frescura</a>
+        <a href="fallas.html" class="menu-btn" id="btnFallas">Fallas</a>
+    </div>
+
 
     <!-- 🆕 Sección Fallas -->
     <section class="card">
