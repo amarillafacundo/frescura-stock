@@ -42,20 +42,22 @@ function renderProductos(filtro = "") {
     const tabla = document.createElement("table");
     tabla.className = "tabla-fallas";
 
-    tabla.innerHTML = `
-        <thead>
-            <tr>
-                <th>Código</th>
-                <th>Producto</th>
-                <th>Peso (g)</th>
-                <th></th>
-                <th>Cantidad</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    `;
+tabla.innerHTML = `
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Producto</th>
+            <th>Peso (g)</th>
+            <th>-</th>
+            <th>Cantidad</th>
+            <th>+</th>
+            <th>Manual</th>
+            <th>OK</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+`;
 
     const tbody = tabla.querySelector("tbody");
 
@@ -100,7 +102,10 @@ function renderProductos(filtro = "") {
         tbody.appendChild(row);
     });
 
-    lista.appendChild(tabla);
+   const wrapper = document.createElement("div");
+wrapper.style.overflowX = "auto";
+wrapper.appendChild(tabla);
+lista.appendChild(wrapper);
 }
 
 
