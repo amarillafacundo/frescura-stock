@@ -297,6 +297,55 @@ h1 {
 
 }
 
+button {
+    touch-action: manipulation;
+}
+
+.btn-reset {
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+.btn-reset:active {
+    transform: scale(0.95);
+}
+
+.menu-bar {
+    display: flex;
+    width: 100%;
+    background: #e5e7eb;
+    border-radius: 14px;
+    padding: 6px;
+    margin: 15px 0;
+    gap: 6px;
+}
+
+.menu-btn {
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 10px;
+    color: #374151;
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+.menu-btn:hover {
+    background: #d1d5db;
+}
+
+.menu-btn.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
 @media (max-width: 600px) {
 
     .tabla-fallas tr {
@@ -400,4 +449,8 @@ h1 {
 .tabla-fallas tr.animar {
     transform: scale(1.02);
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.btn-touch {
+    touch-action: manipulation;
 }

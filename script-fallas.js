@@ -62,12 +62,19 @@ tabla.innerHTML = `
     const tbody = tabla.querySelector("tbody");
 
     
-    productosFiltrados.forEach((producto, index) => {
+productosFiltrados.forEach((producto) => {
 
-        const row = document.createElement("tr");
-        if (producto.fallas > 0) {
-            row.classList.add("con-fallas");
-}
+    // Buscar el índice REAL en el array original
+    const indexReal = productos.findIndex(p => p.codigo === producto.codigo);
+
+    const row = document.createElement("tr");
+    row.dataset.index = indexReal;
+
+
+    if (producto.fallas > 0) {
+        row.classList.add("con-fallas");
+    }
+
 
 
         row.innerHTML = `
@@ -76,13 +83,13 @@ tabla.innerHTML = `
     <td>${producto.peso}</td>
 
     <td>
-        <button onclick="restar(${index})" class="btn-touch">-</button>
+        <button onclick="restar(${indexReal})" class="btn-touch">-</button>
     </td>
 
     <td class="cantidad">${producto.fallas}</td>
 
     <td>
-        <button onclick="sumar(${index})" class="btn-touch">+</button>
+        <button onclick="sumar(${indexReal})" class="btn-touch">+</button>
     </td>
 
     <td>
@@ -91,15 +98,20 @@ tabla.innerHTML = `
             min="1" 
             inputmode="numeric"
             placeholder="0"
-            id="input-${index}"
+            id="input-${indexReal}"
             class="input-touch"
-            onkeydown="if(event.key==='Enter'){sumarCantidad(${index})}"
+            onkeydown="if(event.key==='Enter'){sumarCantidad(${indexReal})}"
         >
     </td>
 
     <td>
-        <button onclick="sumarCantidad(${index})" class="btn-add">OK</button>
+        <button onclick="sumarCantidad(${indexReal})" class="btn-add">OK</button>
     </td>
+
+    <td>
+    <button onclick="resetProducto(${indexReal})" class="btn-reset">Reset</button>
+    </td>
+
 `;
 
 
@@ -150,6 +162,8 @@ function sumarCantidad(index) {
 }
 
 
+
+
 // =============================
 // ➖ RESTAR FALLA
 // =============================
@@ -164,16 +178,34 @@ function restar(index) {
 }
 
 function animarFila(index) {
+
     setTimeout(() => {
-        const filas = document.querySelectorAll(".tabla-fallas tr");
-        if (filas[index]) {
-            filas[index].classList.add("animar");
+
+        const fila = document.querySelector(`tr[data-index='${index}']`);
+
+        if (fila) {
+            fila.classList.add("animar");
+
             setTimeout(() => {
-                filas[index].classList.remove("animar");
+                fila.classList.remove("animar");
             }, 200);
         }
+
     }, 50);
 }
+
+
+
+// =============================
+// 🔄 RESET PRODUCTO
+// =============================
+
+function resetProducto(index) {
+    productos[index].fallas = 0;
+    guardarDatos();
+    renderProductos();
+}
+
 
 
 
@@ -206,6 +238,11 @@ document.getElementById("agregarProducto").addEventListener("click", () => {
     document.getElementById("nuevoNombre").value = "";
     document.getElementById("nuevoPeso").value = "";
 });
+
+
+
+
+
 
 // =============================
 // 🔍 BUSCADOR
