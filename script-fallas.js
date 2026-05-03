@@ -3,6 +3,7 @@
 // =============================
 
 let productos = JSON.parse(localStorage.getItem("fallasProductos"));
+let filtroActual = "";
 
 if (!productos) {
     productos = productosBase.map(p => ({
@@ -133,7 +134,7 @@ lista.appendChild(wrapper);
 function sumar(index) {
     productos[index].fallas++;
     guardarDatos();
-    renderProductos();
+    renderProductos(filtroActual);
     animarFila(index);
 }
 
@@ -150,7 +151,7 @@ function sumarCantidad(index) {
     productos[index].fallas += cantidad;
 
     guardarDatos();
-    renderProductos();
+    renderProductos(filtroActual);
 
     // Espera a que se renderice y vuelve a enfocar
     setTimeout(() => {
@@ -172,7 +173,7 @@ function restar(index) {
     if (productos[index].fallas > 0) {
         productos[index].fallas--;
         guardarDatos();
-        renderProductos();
+        renderProductos(filtroActual);
         animarFila(index);
     }
 }
@@ -203,7 +204,7 @@ function animarFila(index) {
 function resetProducto(index) {
     productos[index].fallas = 0;
     guardarDatos();
-    renderProductos();
+    renderProductos(filtroActual);
 }
 
 
@@ -232,7 +233,7 @@ document.getElementById("agregarProducto").addEventListener("click", () => {
     });
 
     guardarDatos();
-    renderProductos();
+    renderProductos(filtroActual);
 
     document.getElementById("nuevoCodigo").value = "";
     document.getElementById("nuevoNombre").value = "";
@@ -249,7 +250,8 @@ document.getElementById("agregarProducto").addEventListener("click", () => {
 // =============================
 
 document.getElementById("buscarProducto").addEventListener("input", (e) => {
-    renderProductos(e.target.value);
+    filtroActual = e.target.value;
+    renderProductos(filtroActual);
 });
 
 // =============================
@@ -261,7 +263,7 @@ document.getElementById("resetFallas").addEventListener("click", () => {
     if (confirm("¿Seguro que querés resetear todas las fallas?")) {
         productos.forEach(p => p.fallas = 0);
         guardarDatos();
-        renderProductos();
+        renderProductos(filtroActual);
     }
 });
 
